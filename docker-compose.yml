@@ -1,0 +1,51 @@
+services:
+  postgres-bo1:
+    image: postgres
+    container_name: bo1-database
+    environment:
+      POSTGRES_DB: bo1-database
+      POSTGRES_USER: bo1-database
+      POSTGRES_PASSWORD: bo1-database-password
+    ports:
+      - "5432:5432"
+    networks:
+      - pg-network
+
+  postgres-bo2:
+    image: postgres
+    container_name: bo2-database
+    environment:
+      POSTGRES_DB: bo2-database
+      POSTGRES_USER: bo2-database
+      POSTGRES_PASSWORD: bo2-database-password
+    ports:
+      - "5433:5432"
+    networks:
+      - pg-network
+
+  postgres-ho:
+    image: postgres
+    container_name: ho-database
+    environment:
+      POSTGRES_DB: ho-database
+      POSTGRES_USER: ho-database
+      POSTGRES_PASSWORD: ho-database-password
+    ports:
+      - "5434:5432"
+    networks:
+      - pg-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pg-admin-tp
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin_password
+    ports:
+      - "5050:80"
+    networks:
+      - pg-network
+
+networks:
+  pg-network:
+    driver: bridge
